@@ -202,3 +202,4 @@ MIT
 ---
 
 *Part of my from-scratch ML portfolio. See also: [micrograd-numpy](https://github.com/YOUR_USERNAME/micrograd-numpy)*
+# minigpt-shakespeare
