@@ -73,7 +73,7 @@ Unlike the original transformer (LayerNorm after attention), GPT-2 and later use
 # Pre-Norm (used here)
 x = x + attention(layernorm(x))
 
-# Post-Norm (original transformer)  
+# Post-Norm (original transformer)
 x = layernorm(x + attention(x))
 ```
 
@@ -110,18 +110,18 @@ python minigpt.py --mode generate --prompt "ROMEO:" --max_tokens 200
 
 Default hyperparameters (tuned for laptop/small GPU):
 
-| Parameter | Value | Notes |
-|-----------|-------|-------|
-| Layers | 6 | Number of transformer blocks |
-| Heads | 6 | Attention heads per block |
-| Embedding | 384 | Hidden dimension |
-| Context | 256 | Maximum sequence length |
-| Batch size | 64 | Micro-batch size |
-| Gradient accum | 4 | Effective batch = 256 |
-| Learning rate | 3e-4 | Peak LR with warmup |
-| Dropout | 0.2 | Regularization |
+| Parameter      | Value | Notes                        |
+| -------------- | ----- | ---------------------------- |
+| Layers         | 6     | Number of transformer blocks |
+| Heads          | 6     | Attention heads per block    |
+| Embedding      | 384   | Hidden dimension             |
+| Context        | 256   | Maximum sequence length      |
+| Batch size     | 64    | Micro-batch size             |
+| Gradient accum | 4     | Effective batch = 256        |
+| Learning rate  | 3e-4  | Peak LR with warmup          |
+| Dropout        | 0.2   | Regularization               |
 
-~10M parameters. Trains in ~30 minutes on M1 MacBook Pro.
+~10.75M parameters. Trains in ~5-6 hours on M1 MacBook Pro (CPU).
 
 ## Experiment Tracking
 
@@ -143,7 +143,7 @@ python minigpt.py --mode train --no_wandb
 The test suite verifies:
 
 - **LayerNorm**: Output statistics, matches PyTorch implementation
-- **Attention**: Causality (future tokens invisible), variable sequence lengths  
+- **Attention**: Causality (future tokens invisible), variable sequence lengths
 - **MLP**: Shape preservation, nonlinearity verification
 - **Full model**: Loss computation, generation, weight tying
 - **Gradient accumulation**: Accumulated gradients = large batch gradients
@@ -155,25 +155,30 @@ pytest test_minigpt.py -v
 
 ## Sample Output
 
-After training:
+After training (5000 iterations, ~12 hours on M1 MacBook Pro CPU):
 
 ```
 ROMEO:
-What say'st thou? I have done thee wrong,
-And I will kiss thy lips; haply some poison
-Yet doth hang on them, to make me die
-With a restorative.
+Art thou shalt be thy rest?
+My dear lord? a little word again?
 
-JULIET:
-Thy lips are warm!
+MERCUTIO:
+Well, belike.
 
-PRINCE:
-What, ho! you men, you beasts,
-That quench the fire of your pernicious rage
-With purple fountains issuing from your veins
+TYBALT:
+Why, lady, is done. But when this devil's day
+The affection of my affairs and thee?
 ```
 
-Not perfect Shakespeare, but recognizable iambic pentameter and character dialogue structure after just 30 minutes of training.
+```
+KING:
+The king of Buckingham, the king is taken.
+
+QUEEN ELIZABETH:
+Had his reasons, and his brotherhood more.
+```
+
+Not perfect Shakespeare, but recognizable dialogue structure, character names, and poetic rhythm after training.
 
 ## File Structure
 
@@ -201,5 +206,4 @@ MIT
 
 ---
 
-*Part of my from-scratch ML portfolio. See also: [micrograd-numpy](https://github.com/designer-coderajay/micrograd-numpy)*
-# minigpt-shakespeare
+_Part of my from-scratch ML portfolio. See also: [micrograd-numpy](https://github.com/designer-coderajay/micrograd-numpy)_
