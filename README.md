@@ -87,7 +87,7 @@ The token embedding and output projection share the same weight matrix. The embe
 
 ```bash
 # Clone and setup
-git clone https://github.com/YOUR_USERNAME/minigpt-shakespeare.git
+git clone https://github.com/designer-coderajay/minigpt-shakespeare.git
 cd minigpt-shakespeare
 python -m venv venv
 source venv/bin/activate  # or `venv\Scripts\activate` on Windows
@@ -201,5 +201,5 @@ MIT
 
 ---
 
-*Part of my from-scratch ML portfolio. See also: [micrograd-numpy](https://github.com/YOUR_USERNAME/micrograd-numpy)*
+*Part of my from-scratch ML portfolio. See also: [micrograd-numpy](https://github.com/designer-coderajay/micrograd-numpy)*
 # minigpt-shakespeare
